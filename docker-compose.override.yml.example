@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  app:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100m
+        reservations:
+          cpus: '0.01'
+          memory: 20m
+

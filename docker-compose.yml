@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  app:
+    image: bitnoize/asn:latest
+    build:
+      context: .
+    init: true
+    environment:
+      - UID=${ASN_UID:-8193}
+      - GID=${ASN_GID:-8193}
+    ports:
+      - 127.0.0.1:5555:5555
+    deploy:
+      mode: global
+    restart: unless-stopped
+
+
