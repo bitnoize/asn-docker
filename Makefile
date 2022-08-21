@@ -4,7 +4,7 @@
 .DEFAULT_GOAL := help
 
 help:
-	@echo "Makefile commands: build rebuild up down logs ps"
+	@echo "Makefile commands: build rebuild push pull up down logs ps"
 
 build:
 	docker compose build
