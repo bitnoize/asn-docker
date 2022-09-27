@@ -4,13 +4,25 @@ FROM bitnoize/debian:bullseye
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN set -eux; \
-    # Packages
+    # Fake user
+    groupadd -g 1000 dummy; \
+    useradd -M -d /home/dummy -s /bin/bash -g 1000 -u 1000 dummy; \
+    usermod -a -G staff dummy; \
+    mkdir -p /home/dummy; \
+    chown dummy:dummy /home/dummy; \
+    chmod 750 /home/dummy
+
+RUN set -eux; \
+    # Debian Packages
     apt-get update -q; \
     apt-get full-upgrade -yq; \
     apt-get install -yq \
         procps net-tools less wget ca-certificates gnupg curl \
         whois bind9-host mtr-tiny jq ipcalc grepcidr nmap ncat aha; \
     # Clean-up
+    rm -rf /usr/share/doc/*; \
+    rm -rf /usr/share/info/*; \
+    rm -rf /usr/share/man/*; \
     rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \

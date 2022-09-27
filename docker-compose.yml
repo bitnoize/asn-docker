@@ -1,8 +1,13 @@
 version: "3.9"
 
+networks:
+  asn-net:
+    external: true
+
 services:
-  app:
+  backend:
     image: bitnoize/asn:latest
+    container_name: asn-backend
     build:
       context: .
     init: true
@@ -11,7 +16,9 @@ services:
       - GID=${ASN_GID:-8193}
     ports:
       - 127.0.0.1:5555:5555
+    networks:
+      - asn-net
+    restart: unless-stopped
     deploy:
       mode: global
-    restart: unless-stopped
 
