@@ -1,32 +1,37 @@
 
-.PHONY: help build rebuild push pull up down logs ps
+IMAGENAME := bitnoize/asn
+
+.PHONY: help build rebuild push pull
 
 .DEFAULT_GOAL := help
 
 help:
-	@echo "Makefile commands: build rebuild push pull up down logs ps"
+	@echo "Makefile commands: build rebuild push pull"
 
-build:
-	docker compose build
+#build: export BUILD_OPTS := ...
+build: .build-bullseye
 
-rebuild:
-	docker compose build --pull --no-cache
+rebuild: export BUILD_OPTS := --pull --no-cache
+rebuild: .build-bullseye
 
-push:
-	docker compose push
+.build-bullseye:
+	docker build $(BUILD_OPTS) \
+		-t "$(IMAGENAME):bullseye" \
+		-t "$(IMAGENAME):latest" \
+		-f Dockerfile.bullseye \
+		.
 
-pull:
-	docker compose pull
+#push: export PUSH_OPTS := ...
+push: .push-bullseye
 
-up:
-	docker compose up -d
+.push-bullseye:
+	docker push $(PUSH_OPTS) "$(IMAGENAME):bullseye"
+	docker push $(PUSH_OPTS) "$(IMAGENAME):latest"
 
-down:
-	docker compose down
+#pull: export PULL_OPTS := ...
+pull: .pull-bullseye
 
-logs:
-	docker compose logs --tail=100 -f
-
-ps:
-	docker compose ps
+.pull-bullseye:
+	docker pull $(PULL_OPTS) "$(IMAGENAME):bullseye"
+	docker pull $(PULL_OPTS) "$(IMAGENAME):latest"
 
