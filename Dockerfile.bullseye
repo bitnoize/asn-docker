@@ -6,10 +6,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN set -eux; \
     # Unprivileged user
     groupadd -g 1000 asn; \
-    useradd -M -d /home/asn -s /bin/bash -g 1000 -u 1000 asn; \
+    useradd -M -d /var/lib/asn -s /bin/bash -g 1000 -u 1000 asn; \
     usermod -a -G tty,staff asn; \
-    mkdir -m 0750 /home/asn; \
-    chown asn:asn /home/asn
+    mkdir -m 0750 /var/lib/asn; \
+    chown asn:asn /var/lib/asn
 
 COPY docker-entrypoint.sh /sbin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
