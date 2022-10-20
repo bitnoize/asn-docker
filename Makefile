@@ -1,5 +1,5 @@
 
-IMAGENAME := bitnoize/asn
+IMAGENAME := ghcr.io/bitnoize/asn
 
 .PHONY: help build rebuild push pull
 

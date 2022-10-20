@@ -11,7 +11,11 @@ if [ "$(id -u)" = "0" ]; then
     groupmod -g "$GID" asn
   fi
 
-  chown asn:asn /home/asn
+  chown -R asn:asn /home/asn
+
+  if [ -d "/lib/entrypoint" ]; then
+    run-parts -v --regex '.*sh$' /lib/entrypoint
+  fi
 
   exec gosu asn "$@"
 else
