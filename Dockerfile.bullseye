@@ -36,9 +36,9 @@ RUN set -eux; \
     chown root:root /usr/local/bin/asn; \
     chmod 0755 /usr/local/bin/asn
 
-CMD ["asn", "-l", "0.0.0.0", "5555"]
+CMD ["asn", "-l", "0.0.0.0", "3000"]
 
 WORKDIR /var/www
 
-EXPOSE 5555
+EXPOSE 3000
 
