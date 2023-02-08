@@ -1,6 +1,8 @@
 
 FROM ghcr.io/bitnoize/debian:bullseye
 
+LABEL org.opencontainers.image.source=https://github.com/bitnoize/asn-docker
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN set -eux; \
