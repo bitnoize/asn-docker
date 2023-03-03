@@ -19,10 +19,23 @@ ENTRYPOINT ["entrypoint.sh"]
 RUN set -eux; \
     # Debian Packages
     apt-get update -q; \
-    apt-get full-upgrade -yq; \
     apt-get install -yq \
-        procps net-tools less wget ca-certificates gnupg curl \
-        whois bind9-host mtr-tiny jq ipcalc grepcidr nmap ncat aha; \
+        procps \
+        net-tools \
+        less \
+        wget \
+        ca-certificates \
+        gnupg \
+        curl \
+        whois \
+        bind9-host \
+        mtr-tiny \
+        jq \
+        ipcalc \
+        grepcidr \
+        nmap \
+        ncat \
+        aha; \
     # Clean-up
     rm -rf \
         /var/www/* \
@@ -39,8 +52,6 @@ RUN set -eux; \
     chmod 0755 /usr/local/bin/asn
 
 CMD ["asn", "-l", "0.0.0.0", "3000"]
-
-WORKDIR /var/www
 
 EXPOSE 3000
 
