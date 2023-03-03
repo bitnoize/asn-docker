@@ -1,5 +1,5 @@
 ASN
 ---
 
-Docker image for [ASN](https://github.com/nitefood/asn).
+Docker image for [ASN](https://github.com/nitefood/asn) lookup tool.
 
